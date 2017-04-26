@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>个站测试</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <link rel="shortcut icon" href="http://cdn.leoao.com/ico/v2/favicon.ico">
+  <link rel="icon" href="http://cdn.leoao.com/ico/v2/favicon.ico" type="image/vnd.microsoft.icon">
+  <meta content="email=no" name="format-detection" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+  <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<script type="text/javascript">
+  var docEl = document.documentElement,
+    //当设备的方向变化（设备横向持或纵向持）此事件被触发。绑定此事件时，
+    //注意现在当浏览器不支持orientationChange事件的时候我们绑定了resize 事件。
+    //总来的来就是监听当然窗口的变化，一旦有变化就需要重新设置根字体的值
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function() {
+      //设置根字体大小
+      docEl.style.fontSize = 20 * (docEl.clientWidth / 375) + 'px';
+    };
+
+  //绑定浏览器缩放与加载时间
+  window.addEventListener(resizeEvt, recalc, false);
+  document.addEventListener('DOMContentLoaded', recalc, false);
+</script>
+
+<body>
+  <div id="app">
+    <div style="margin: 30px 0; text-align: center">
+      <kbd><%= title %></kbd>
+    </div>
+    <div style="margin: 15px">
+      <button type="button" class="btn btn-default btn-sm" onclick="getAll()">获取所有记录</button>
+    </div>
+    <div style="margin: 15px">
+      <button type="button" class="btn btn-success btn-sm" onclick="add()">新增一条记录</button>
+    </div>
+    <div style="margin: 15px">
+      <button type="button" class="btn btn-info btn-sm" onclick="update()">修改一条记录</button>
+    </div>
+    <div style="margin: 15px">
+      <button type="button" class="btn btn-warning btn-sm" onclick="search()">查找一条记录</button>
+    </div>
+    <div style="margin: 15px">
+      <button type="button" class="btn btn-danger btn-sm" onclick="del()">删除一条记录</button>
+    </div>
+  </div>
+  <!-- built files will be auto injected -->
+</body>
+<script src='https://cdn.bootcss.com/jquery/2.2.3/jquery.js'></script>
+<script>
+  function getAll() {
+    console.log('method======>get all')
+    $.ajax({
+      url: '/api/getAll',
+      type: 'GET',
+      success: function(res) {
+        console.log(res)
+      }
+    })
+  }
+
+  function add() {
+    console.log('method======>add')
+    $.ajax({
+      url: '/api/add',
+      type: 'POST',
+      data: {
+        name: 'test-name-' + Math.floor(Math.random()*10),
+        sex: 0,
+        age: Math.floor(Math.random()*10)
+      },
+      success: function(res) {
+        console.log(res)
+      }
+    })
+  }
+
+  function update() {
+    console.log('method======>update')
+    $.ajax({
+      url: '/api/update',
+      type: 'POST',
+      data: {
+        name: 'eugene',
+        age: 26
+      },
+      success: function(res) {
+        console.log(res)
+      }
+    })
+  }
+
+  function search() {
+    console.log('method======>search')
+    $.ajax({
+      url: '/api/search',
+      type: 'GET',
+      data: {
+        age: Math.floor(Math.random()*10)
+      },
+      success: function(res) {
+        console.log(res)
+      }
+    })
+  }
+
+  function del() {
+    console.log('method======>delete')
+    $.ajax({
+      url: '/api/delete',
+      type: 'GET',
+      success: function(res) {
+        console.log(res)
+      }
+    })
+  }
+</script>
+</html>

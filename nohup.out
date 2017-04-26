@@ -1,0 +1,46 @@
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] reading config /Users/Eugene/lessLessPicture/nodemon.json[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] ignoring: .git .nyc_output .sass-cache bower_components coverage /Users/Eugene/lessLessPicture/node_modules/**/* .git node_modules/**/node_modules[39m
+[33m[nodemon] watching: *.*[39m
+[33m[nodemon] watching extensions: js,json[39m
+[32m[nodemon] starting `node bin/www`[39m
+[33m[nodemon] child pid: 13795[39m
+[33m[nodemon] watching 15 files[39m
+mongodb 连接成功
+  <-- GET /
+GET / - 70ms
+  --> GET / 200 83ms 3.61kb
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] reading config /Users/Eugene/lessLessPicture/nodemon.json[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] ignoring: .git .nyc_output .sass-cache bower_components coverage /Users/Eugene/lessLessPicture/node_modules/**/* .git node_modules/**/node_modules[39m
+[33m[nodemon] watching: *.*[39m
+[33m[nodemon] watching extensions: js,json[39m
+[32m[nodemon] starting `node bin/www`[39m
+[33m[nodemon] child pid: 13801[39m
+[33m[nodemon] watching 15 files[39m
+mongodb 连接成功
+  <-- GET /
+GET / - 76ms
+  --> GET / 200 88ms 3.61kb
+  <-- GET /
+GET / - 6ms
+  --> GET / 200 11ms 3.61kb
+[33m[nodemon] files triggering change check: package.json[39m
+[33m[nodemon] matched rule: **/*.*[39m
+[33m[nodemon] changes after filters (before/after): 1/1[39m
+[32m[nodemon] restarting due to changes...[39m
+[33m[nodemon] package.json[39m
+
+[32m[nodemon] starting `node bin/www`[39m
+[33m[nodemon] child pid: 13805[39m
+[33m[nodemon] files triggering change check: package.json[39m
+[33m[nodemon] matched rule: **/*.*[39m
+[33m[nodemon] changes after filters (before/after): 1/1[39m
+[32m[nodemon] restarting due to changes...[39m
+[33m[nodemon] package.json[39m
+
+[32m[nodemon] starting `node bin/www`[39m
+[33m[nodemon] child pid: 13808[39m
+mongodb 连接成功
