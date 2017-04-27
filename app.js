@@ -22,12 +22,22 @@ const app = new Koa();
 
 /****   mongodb   ****/
 mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoUrl);
-const db = mongoose.connection;
-db.on('error',console.error.bind(console,'mongodb 连接错误:'));
-db.once('open', function() {
-  console.log('mongodb 连接成功')
+mongoose.connect(config.mongoUrl, {
+  auth: {
+    authdb: 'admin'
+  }
+}, function(err) {
+  if (err) {
+    console.error(err)
+  } else {
+    console.log('mongodb 连接成功')
+  }
 });
+// const db = mongoose.connection;
+// db.on('error',console.error.bind(console,'mongodb 连接错误:'));
+// db.once('open', function() {
+//   console.log('mongodb 连接成功')
+// });
 
 // error handler
 onerror(app);
