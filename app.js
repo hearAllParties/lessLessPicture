@@ -14,6 +14,7 @@ import bodyparser from 'koa-bodyparser'
 import logger from 'koa-logger'
 // import models from './models'
 import index from './routes/index'
+import login from './routes/login'
 import users from './routes/users'
 import mongoose from 'mongoose'
 import config from './config'
@@ -65,6 +66,7 @@ app.use(async(ctx, next) => {
 
 // routes
 app.use(index.routes(), index.allowedMethods());
+app.use(login.routes(), login.allowedMethods());
 app.use(users.routes(), users.allowedMethods());
 
 module.exports = app;
