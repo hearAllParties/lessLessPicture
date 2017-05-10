@@ -12,6 +12,8 @@ import json from 'koa-json'
 import onerror from 'koa-onerror'
 import bodyparser from 'koa-bodyparser'
 import logger from 'koa-logger'
+import cors from 'koa-cors'
+import convert from "koa-convert"
 // import models from './models'
 import index from './routes/index'
 import login from './routes/login'
@@ -47,6 +49,7 @@ onerror(app);
 app.use(bodyparser());
 app.use(json());
 app.use(logger());
+app.use(convert(cors()));
 app.use(require('koa-static')(__dirname + '/public'));
 
 app.use(views(__dirname + '/views', {
