@@ -1,4 +1,3 @@
-// var router = require('koa-router')();
 import Router from 'koa-router'
 import Api from '../controllers'
 
@@ -16,6 +15,12 @@ router.get('/foo', async function (ctx, next) {
     title: 'koa2 foo'
   });
 });
+
+router.get('/test', async function(ctx, next) {
+    await ctx.render('users', {
+        title: 'koa-session测试'
+    });
+})
 
 /**********接口请求**********/
 

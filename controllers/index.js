@@ -2,12 +2,12 @@ import UserModel from '../models/user'
 
 const getAll = async(ctx, next) => {
   // console.log(ctx.request.query, ctx.request.body)
-  const users = await UserModel.find({});
-  ctx.body = {
-    success: true,
-    data: users || {},
-    message: '获取记录成功'
-  }
+  // const users = await UserModel.find({});
+  // ctx.body = {
+  //   success: true,
+  //   data: users || {},
+  //   message: '获取记录成功'
+  // }
 
   //调用静态方法 功能同上
   // UsersModel.fetch(function(err, users) {
@@ -19,18 +19,31 @@ const getAll = async(ctx, next) => {
   //         users: users
   //     }
   // })
+    ctx.session.user = 'admin';
+    const cookie = ctx.cookies.get('token', { signed: true });
+    console.log('cookies: ', cookie)
+    ctx.body = {
+        success: true,
+        msg: 'set session ok'
+    }
 }
 
 const add = async(ctx, next) => {
-  const reqData = ctx.request.body;
-  const res = await UserModel.create(reqData);
-  if (res) {
+  // const reqData = ctx.request.body;
+  // const res = await UserModel.create(reqData);
+  // if (res) {
+  //   ctx.body = {
+  //     success: true,
+  //     data: res,
+  //     message: '新增记录成功'
+  //   }
+  // }
+    console.log('session: ', ctx.session)
+    const user = ctx.session.user
     ctx.body = {
-      success: true,
-      data: res,
-      message: '新增记录成功'
+        success: !!user,
+        msg: `get session ${user ? 'ok' : 'fail'}`
     }
-  }
 }
 
 const update = async(ctx, next) => {

@@ -1,11 +1,3 @@
-// const Koa = require('koa');
-// const views = require('koa-views');
-// const json = require('koa-json');
-// const onerror = require('koa-onerror');
-// const bodyparser = require('koa-bodyparser')();
-// const logger = require('koa-logger');
-// const index = require('./routes/index');
-// const users = require('./routes/users');
 import Koa from 'koa'
 import views from 'koa-views'
 import json from 'koa-json'
@@ -14,7 +6,8 @@ import bodyparser from 'koa-bodyparser'
 import logger from 'koa-logger'
 import cors from 'koa-cors'
 import convert from "koa-convert"
-// import models from './models'
+import session from 'koa2-cookie-session'
+
 import index from './routes/index'
 import login from './routes/login'
 import users from './routes/users'
@@ -24,18 +17,18 @@ import config from './config'
 const app = new Koa();
 
 /****   mongodb   ****/
-mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoUrl, {
-  auth: {
-    authdb: 'admin'
-  }
-}, function(err) {
-  if (err) {
-    console.error(err)
-  } else {
-    console.log('mongodb 连接成功')
-  }
-});
+// mongoose.Promise = global.Promise;
+// mongoose.connect(config.mongoUrl, {
+//   auth: {
+//     authdb: 'admin'
+//   }
+// }, function(err) {
+//   if (err) {
+//     console.error(err)
+//   } else {
+//     console.log('mongodb 连接成功')
+//   }
+// });
 // const db = mongoose.connection;
 // db.on('error',console.error.bind(console,'mongodb 连接错误:'));
 // db.once('open', function() {
@@ -57,6 +50,26 @@ app.use(views(__dirname + '/views', {
     html: 'lodash'
   }
 }));
+
+app.keys = ['lesslesspricture'] // 设置cookie秘钥
+
+app.use(session({
+    key: "koa:lesslesspricture",   //default "koa:sid"
+    expires:3, //default 7
+    path:"/" //default "/"
+}));
+//
+app.use(async (ctx, next) => {
+    ctx.cookies.set("token", 'abcdefg', { signed: true });
+    await next()
+});
+// app.use(ctx => {
+//     ctx.session.user = {
+//         name: "myname"
+//     };
+//     // ctx.body = ctx.session;
+// });
+
 
 // logger
 app.use(async(ctx, next) => {
