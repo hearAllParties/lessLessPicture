@@ -6,7 +6,8 @@ import bodyparser from 'koa-bodyparser'
 import logger from 'koa-logger'
 import cors from 'koa-cors'
 import convert from "koa-convert"
-import session from 'koa2-cookie-session'
+// import session from 'koa2-cookie-session'
+import session from 'koa-session-redis'
 
 import index from './routes/index'
 import login from './routes/login'
@@ -54,13 +55,30 @@ app.use(views(__dirname + '/views', {
 app.keys = ['lesslesspricture'] // 设置cookie秘钥
 
 app.use(session({
-    key: "koa:lesslesspricture",   //default "koa:sid"
-    expires:3, //default 7
-    path:"/" //default "/"
+    store: {
+        host: '127.0.0.1',
+        port: 6379,
+        ttl: 60 * 60,
+        options: {
+            auth_pass: 'eugene',
+        },
+        db: 0
+    }
 }));
-//
+
 app.use(async (ctx, next) => {
-    ctx.cookies.set("token", 'abcdefg', { signed: true });
+    ctx.cookies.set(
+        'token',
+        'hello world',
+        {
+            domain: 'localhost',  // 写cookie所在的域名
+            path: '/',       // 写cookie所在的路径
+            maxAge: 10 * 60 * 1000, // cookie有效时长
+            expires: new Date('2017-09-15'),  // cookie失效时间
+            httpOnly: false,  // 是否只用于http请求中获取
+            overwrite: false  // 是否允许重写
+        }
+    )
     await next()
 });
 // app.use(ctx => {
